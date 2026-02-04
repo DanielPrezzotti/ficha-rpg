@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Ficha de RPG</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1 class="titulo">Criação de Personagem</h1>
+
+<!-- ========================= -->
+<!-- TELA 1 (INALTERADA) -->
+<!-- ========================= -->
+<div id="tela1" class="tela ativa">
+
+    <div class="form-linha">
+        <div>
+            <label>Nome</label>
+            <input type="text" id="nome">
+        </div>
+
+        <div>
+            <label>Classe</label>
+            <input type="text" id="classe">
+        </div>
+
+        <div>
+            <label>Nível</label>
+            <input type="number" id="nivel" value="1">
+        </div>
+    </div>
+
+    <label>Imagem do Personagem</label>
+    <input type="file" id="imagemInput" accept="image/*">
+
+    <div class="imagem-preview">
+        <img id="previewImagem">
+    </div>
+
+    <label>História</label>
+    <textarea id="historia"></textarea>
+
+    <button onclick="irParaTela(2)">Próxima página</button>
+</div>
+
+<!-- ========================= -->
+<!-- TELA 2 (INALTERADA) -->
+<!-- ========================= -->
+<div id="tela2" class="tela">
+
+    <h2>Atributos</h2>
+    <div class="linha-add">
+        <input id="attrNome" placeholder="Nome">
+        <input id="attrValor" type="number" placeholder="Valor">
+        <button onclick="addItem('atributos')">Adicionar</button>
+    </div>
+    <ul id="listaAtributos"></ul>
+
+    <h2>Combate</h2>
+    <div class="linha-add">
+        <input id="combNome" placeholder="Nome">
+        <input id="combValor" type="number" placeholder="Valor">
+        <button onclick="addItem('combate')">Adicionar</button>
+    </div>
+    <ul id="listaCombate"></ul>
+
+    <h2>Perícias</h2>
+    <div class="linha-add">
+        <input id="periNome" placeholder="Nome">
+        <input id="periValor" type="number" placeholder="Valor">
+        <button onclick="addItem('pericias')">Adicionar</button>
+    </div>
+    <ul id="listaPericias"></ul>
+
+    <h2>Habilidades</h2>
+    <div class="linha-add">
+        <input id="habNome" placeholder="Nome da habilidade">
+        <input id="habEfeito" placeholder="Efeito">
+        <button onclick="addHabilidade()">Adicionar</button>
+    </div>
+    <ul id="listaHabilidades"></ul>
+
+    <button onclick="irParaTela(3)">Continuar</button>
+</div>
+
+<!-- ========================= -->
+<!-- TELA 3 (AJUSTADA + RPG DINÂMICO) -->
+<!-- ========================= -->
+<div id="tela3" class="tela">
+
+    <div class="ficha-container">
+
+        <header class="ficha-header">
+            <div class="cabecalho-personagem">
+
+                <div class="foto-box">
+                    <img id="fotoFinal">
+                </div>
+
+                <div class="historia-final" id="historiaFinal"></div>
+
+            </div>
+
+            <h1 id="fichaNome"></h1>
+            <p id="fichaClasse"></p>
+
+            <div class="nivel-box">
+                Nível:
+                <button onclick="alterarNivel(-1)">−</button>
+                <span id="nivelFinal"></span>
+                <button onclick="alterarNivel(1)">+</button>
+            </div>
+        </header>
+
+        <div class="ficha-grid">
+
+            <div class="bloco">
+                <h2>Atributos</h2>
+                <ul id="finalAtributos"></ul>
+            </div>
+
+            <div class="bloco">
+                <h2>Combate</h2>
+                <ul id="finalCombate"></ul>
+            </div>
+
+            <div class="bloco">
+                <h2>Perícias</h2>
+                <ul id="finalPericias"></ul>
+            </div>
+
+            <div class="bloco grande">
+                <h2>Habilidades</h2>
+                <ul id="finalHabilidades"></ul>
+            </div>
+
+            <div class="bloco grande">
+                <h2>Inventário</h2>
+                <ul id="inventarioLista"></ul>
+            </div>
+
+            <div class="bloco destaque" id="inspiracao" style="display:none;">
+                ⭐ INSPIRAÇÃO ⭐
+            </div>
+
+        </div>
+    </div>
+
+    <button id="botaoMais">+</button>
+
+    <div id="menuMais">
+        <button onclick="addExtra('atributos')">+ Atributo</button>
+        <button onclick="addExtra('combate')">+ Combate</button>
+        <button onclick="addExtra('pericias')">+ Perícia</button>
+        <button onclick="addExtraHabilidade()">+ Habilidade</button>
+        <button onclick="addInventario()">Inventário</button>
+        <button onclick="toggleInspiracao()">Inspiração</button>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
