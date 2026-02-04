@@ -156,3 +156,50 @@ function toggleInspiracao() {
         inspiracao.style.display === 'none' ? 'block' : 'none';
     menuMais.style.display = 'none';
 }
+function salvarFicha() {
+    const ficha = {
+        nome: nome.value,
+        classe: classe.value,
+        nivel: nivelAtual,
+        historia: historia.value,
+        atributos: dados.atributos,
+        combate: dados.combate,
+        pericias: dados.pericias,
+        habilidades: dados.habilidades,
+        inventario: inventarioLista.innerHTML,
+        inspiracao: inspiracao.style.display === 'block',
+        imagem: fotoFinal.src
+    };
+
+    localStorage.setItem("fichaRPG", JSON.stringify(ficha));
+    alert("Ficha salva com sucesso!");
+}
+
+function carregarFichaSalva() {
+    const ficha = JSON.parse(localStorage.getItem("fichaRPG"));
+    if (!ficha) {
+        alert("Nenhuma ficha salva encontrada.");
+        return;
+    }
+
+    nome.value = ficha.nome;
+    classe.value = ficha.classe;
+    nivelAtual = ficha.nivel;
+    nivelFinal.textContent = ficha.nivel;
+    historia.value = ficha.historia;
+
+    dados.atributos = ficha.atributos;
+    dados.combate = ficha.combate;
+    dados.pericias = ficha.pericias;
+    dados.habilidades = ficha.habilidades;
+
+    inventarioLista.innerHTML = ficha.inventario;
+    inspiracao.style.display = ficha.inspiracao ? 'block' : 'none';
+
+    if (ficha.imagem) {
+        fotoFinal.src = ficha.imagem;
+        previewImagem.src = ficha.imagem;
+    }
+
+    carregarFicha();
+}
